@@ -90,3 +90,13 @@ if you want to re-build the UI from scratch:
 Most people either love it or hate it, I'm in between, but it gets the job done for me. Bootstrapping slick can be a
 bit tricky, I usually run the app the first time and run the 1.sql evolution.  Then I run a separate app which calls
 slick.codegen.SourceCodeGenerator to generate new code bindings, and dump those back into app.models.schema.
+
+
+### Acknowledgements
+Almost all of this code has been directly based on someone else's work, though
+most of my sources have long been forgotten.  If you see something that smacks
+of your work ping me and I'll add you to this list
+
+[Scala Play React Seed](https://github.com/yohangz/scala-play-react-seed) which
+told me this was possible and was a huge head start
+[Protected Routes in React](https://youtu.be/0x8Dap2EIVE) Helped to move from v5 to  v6 for react-router
