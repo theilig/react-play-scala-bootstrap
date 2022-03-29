@@ -1,5 +1,6 @@
 package controllers
 
+import com.typesafe.config.ConfigException
 import dao.UserDao
 import models.schema.Tables
 
@@ -30,7 +31,9 @@ class Login @Inject()(
     try {
       val loginAttempt = request.body.asJson.get.as[LoginAttempt]
       userDao.login(loginAttempt).map(c => sendConfirmation(loginAttempt.email, c)).recover({
-        case _ => BadRequest("""Account was not found, please sign up""")
+        case e: ConfigException => ServiceUnavailable("""There was a problem sending your confirmation e-mail""")
+        case n: NoSuchElementException => BadRequest("""Account was not found, please sign up""")
+        case t: Throwable => ServiceUnavailable("""Unexpected error occurred""")
       })
     } catch {
       case _: Throwable => Future.successful(BadRequest("Invalid Json"))

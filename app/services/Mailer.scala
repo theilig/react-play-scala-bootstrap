@@ -30,7 +30,7 @@ class Mailer @Inject() (config: Configuration) extends Logging {
       if (response.getStatusCode >= 300) {
         logger.error(s"Failure in sending code: ${response.getStatusCode}: ${response.getBody}")
       }
-      response.getStatusCode == 200 || response.getStatusCode == 201
+      response.getStatusCode < 300
     } catch {
       // Should be more specific about the errors being caught, but ultimately we just want to report a failure
       // back to the user.

@@ -5,7 +5,7 @@ import {useAuth} from "./context/auth";
 function PrivateRoutes() {
     const { authTokens } = useAuth();
     const location = useLocation();
-    return authTokens ? <Outlet /> : <Navigate to="/login" replace state={{from: location}} />
+    return (authTokens && authTokens.token) ? <Outlet /> : <Navigate to="/login" replace state={{from: location}} />
 }
 
 export default PrivateRoutes;
