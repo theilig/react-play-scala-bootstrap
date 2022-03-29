@@ -7,6 +7,7 @@ import { AuthContext } from "./context/auth";
 import PrivateRoutes from "./PrivateRoutes";
 import axios from "axios";
 import {Routes} from "react-router";
+import Logout from "./pages/Logout";
 
 function App(props) {
     let existingTokens = localStorage.getItem("tokens");
@@ -26,6 +27,7 @@ function App(props) {
     const logout = () => {
         setTokens({})
         setIsLoggedIn(false)
+        return ""
     }
 
     const confirm = (email, token) => {
@@ -61,6 +63,8 @@ function App(props) {
                     </Route>
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />
+                    <Route path="/confirm/:email/:confirmationToken" element={<Protected />} />
+                    <Route path="/logout" element={<Logout />} />
                     <Route element={NotFound} />
                 </Routes>
             </Router>
